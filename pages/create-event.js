@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import {useEffect, useState} from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { ethers } from "ethers";
-import { useAccount } from "wagmi";
+import {ethers} from "ethers";
+import {useAccount} from "wagmi";
 import Alert from "../components/Alert";
 import connectContract from "../utils/connectContract";
 import getRandomImage from "../utils/getRandomImage";
@@ -62,13 +62,11 @@ export default function CreateEvent() {
         let deposit = ethers.utils.parseEther(refund);
         let eventDateAndTime = new Date(`${eventDate} ${eventTime}`);
         let eventTimestamp = eventDateAndTime.getTime();
-        let eventDataCID = cid;
-
         const txn = await rsvpContract.createNewEvent(
           eventTimestamp,
           deposit,
           maxCapacity,
-          eventDataCID,
+          cid,
           { gasLimit: 900000 }
         );
 
