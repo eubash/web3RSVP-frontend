@@ -32,7 +32,6 @@ export default function CreateEvent() {
       link: eventLink,
       image: getRandomImage(),
     };
-
     try {
       const response = await fetch("/api/store-event-data", {
         method: "POST",
@@ -62,11 +61,12 @@ export default function CreateEvent() {
         let deposit = ethers.utils.parseEther(refund);
         let eventDateAndTime = new Date(`${eventDate} ${eventTime}`);
         let eventTimestamp = eventDateAndTime.getTime();
+        let eventDataCID = cid;
         const txn = await rsvpContract.createNewEvent(
           eventTimestamp,
           deposit,
           maxCapacity,
-          cid,
+          eventDataCID,
           { gasLimit: 900000 }
         );
 

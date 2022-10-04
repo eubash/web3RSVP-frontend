@@ -11,7 +11,7 @@ import client from "../apollo-client";
 const infuraId = process.env.NEXT_PUBLIC_INFURA_ID;
 
 const { chains, provider } = configureChains(
-  [chain.polygon],
+  [chain.polygonMumbai],
   [infuraProvider({ infuraId }), publicProvider()]
 );
 
