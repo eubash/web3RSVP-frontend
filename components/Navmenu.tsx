@@ -2,13 +2,18 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import joinClassNames from "../utils/joinClassNames";
 
-export default function Navmenu({ account, disconnect }) {
+type NavMenuProps = {
+  account: string,
+  disconnect: () => void
+};
+
+export default function Navmenu({ account, disconnect }: NavMenuProps) {
   return (
     <Menu as="div" className="relative z-10 inline-block text-left">
       <div>
         <Menu.Button className="inline-flex items-center px-2.5 py-2 rounded-md text-sm font-medium bg-indigo-100 text-indigo-800 w-32 cursor-pointer">
           <span className="w-12 h-3 mr-1 bg-indigo-400 rounded-full"></span>
-          <p className="text-ellipsis overflow-hidden">{account.address}</p>
+          <p className="text-ellipsis overflow-hidden">{account}</p>
         </Menu.Button>
       </div>
       <Transition
@@ -23,7 +28,7 @@ export default function Navmenu({ account, disconnect }) {
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <Menu.Item>
-              {({ account }) => (
+              {(account) => (
                 <a
                   href={`/my-rsvps/upcoming`}
                   className={joinClassNames(
@@ -36,7 +41,7 @@ export default function Navmenu({ account, disconnect }) {
               )}
             </Menu.Item>
             <Menu.Item>
-              {({ account }) => (
+              {(account) => (
                 <a
                   href={`/my-events/upcoming`}
                   className={joinClassNames(
@@ -49,7 +54,7 @@ export default function Navmenu({ account, disconnect }) {
               )}
             </Menu.Item>
             <Menu.Item>
-              {({ account }) => (
+              {(account) => (
                 <a
                   onClick={disconnect}
                   className={joinClassNames(

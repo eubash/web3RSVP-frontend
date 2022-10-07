@@ -1,16 +1,23 @@
+import { ReactNode, ChangeEvent } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import joinClassNames from "../utils/joinClassNames";
 import DashboardNav from "./DashboardNav";
 
-export default function Dashboard({ page, isUpcoming, children }) {
+type DashboardProps = {
+  page: string,
+  isUpcoming: boolean,
+  children: ReactNode
+};
+
+export default function Dashboard({ page, isUpcoming, children }: DashboardProps) {
   const router = useRouter();
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
     const name = e.target.value;
-    const href = tabs.find((tab) => tab.name == name).href;
-    router.push(href);
+    const href = tabs.find((tab: {  name: string, href: string, current: boolean }) => tab.name == name)?.href;
+    if (href) router.push(href);
   };
 
   let tabs = [
@@ -46,7 +53,7 @@ export default function Dashboard({ page, isUpcoming, children }) {
               id="tabs"
               name="tabs"
               className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-              defaultValue={tabs.find((tab) => tab.current).name}
+              defaultValue={tabs.find((tab) => tab.current)?.name}
               onChange={handleChange}
             >
               {tabs.map((tab) => (

@@ -4,11 +4,13 @@ import client from "../../apollo-client";
 import formatTimestamp from "../../utils/formatTimestamp";
 import Image from "next/image";
 
-import { useState } from "react";
+import {ReactNode, useState} from "react";
 import { ethers } from "ethers";
 import { useAccount } from "wagmi";
 import connectContract from "../../utils/connectContract";
 import Alert from "../../components/Alert";
+
+import { TEvent } from "../types/event";
 
 import {
   EmojiHappyIcon,
@@ -17,12 +19,16 @@ import {
   LinkIcon
 } from "@heroicons/react/outline";
 
-export default function Event({ event }) {
+type EventProps = {
+  event: TEvent,
+};
+
+export default function Event({ event }: EventProps) {
   // console.log("EVENT:", event);
   const { address } = useAccount();
-  const [success, setSuccess] = useState(null);
-  const [message, setMessage] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [success, setSuccess] = useState<boolean | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean | null>(null);
   const [currentTimestamp, setEventTimestamp] = useState(new Date().getTime());
 
   function checkIfAlreadyRSVPed() {
@@ -66,7 +72,9 @@ export default function Event({ event }) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <Head>
+      { event ?
+        (<div>
+          <Head>
         <title> {event.name} | web3rsvp</title>
         <meta name="description" content={event.name} />
         <link rel="icon" href="/favicon.ico" />
@@ -170,12 +178,12 @@ export default function Event({ event }) {
             </div>
           </div>
         </div>
-      </section>
+      </section></div>) : <></>}
     </div>
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any): Promise<{ props: EventProps }> {
   const { id } = context.params;
 
   const { data } = await client.query({
