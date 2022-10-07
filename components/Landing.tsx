@@ -1,6 +1,7 @@
 import Head from "next/head";
+import { AppProps } from "./types/props";
 
-export default function Landing({ children }) {
+export default function Landing({ children }: AppProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Head>

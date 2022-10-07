@@ -3,6 +3,7 @@ import { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { useAccount } from "wagmi";
 import EventCard from "../../components/EventCard";
+import { TEvent } from "../types/event";
 
 const MY_UPCOMING_EVENTS = gql`
     query Events($eventOwner: String, $currentTimestamp: String) {
@@ -55,7 +56,7 @@ export default function MyUpcomingEvents() {
               role="list"
               className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
             >
-              {data.events.map((event) => (
+              {data.events.map((event: TEvent) => (
                 <li key={event.id}>
                   <EventCard
                     id={event.id}

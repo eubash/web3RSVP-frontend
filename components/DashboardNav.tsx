@@ -1,6 +1,11 @@
 import joinClassNames from "../utils/joinClassNames";
+import {ReactNode} from "react";
 
-export default function DashboardNav({ page }) {
+type DashboardNavProps = {
+  page: string
+};
+
+export default function DashboardNav({ page }: DashboardNavProps) {
   let navigation = [
     {
       name: "My Events",

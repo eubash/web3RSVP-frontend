@@ -53,7 +53,7 @@ export default function MyPastRSVPs() {
               role="list"
               className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
             >
-              {data.account.rsvps.map(function (rsvp) {
+              {data.account.rsvps.map(function (rsvp: Record<string, any>) {
                 if (rsvp.event.eventTimestamp < currentTimestamp) {
                   return (
                     <li key={rsvp.event.id}>
