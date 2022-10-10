@@ -38,11 +38,13 @@ export default function CreateEvent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
+      debugger;
       if (response.status !== 200) {
         alert("Oops! Something went wrong. Please refresh and try again.");
       } else {
         console.log("Form successfully submitted!");
         let responseJSON = await response.json();
+        debugger;
         await createEvent(responseJSON.cid);
       }
       // check response, if success is false, dont take them to success page

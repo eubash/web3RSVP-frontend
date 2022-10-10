@@ -178,7 +178,11 @@ export default function Event({ event }: EventProps) {
             </div>
           </div>
         </div>
-      </section></div>) : <></>}
+      </section></div>) :
+        <div className="flex item-center pt-5">
+          😇 We are creating your event! Refresh your page after couple of minutes or return later.
+        </div>
+      }
     </div>
   );
 }
